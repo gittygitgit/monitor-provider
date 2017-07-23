@@ -1,0 +1,28 @@
+Task:
+Run app
+
+Answer:
+./mvnw spring-boot:run -s ~/.m2/settings.xml
+./mvnw spring-boot:run -s /usr/local/apache-maven/apache-maven-3.2.3/conf/settings.xml
+--------------
+Task:
+Build project
+
+Answer:
+mvnw clean install
+
+
+--------------
+Issue:
+Could not find or load main class org.apache.maven.wrapper.MavenWrapperMain
+
+Resolution:
+The mvnw wrapper is out of date.
+
+Recreate by running the following:
+mvn -N io.takari:maven:wrapper
+--------------
+
+
+
+curl -X POST localhost:8080/api/trades -d '{"symbol": "MSFT", "volume": "100", "price": "12.5"}' -H 'Content-Type:application/json'

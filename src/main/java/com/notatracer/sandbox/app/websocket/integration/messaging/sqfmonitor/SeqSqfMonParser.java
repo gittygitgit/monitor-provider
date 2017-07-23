@@ -18,11 +18,19 @@ public class SeqSqfMonParser implements MessageParser<SeqSqfMonMsg> {
 			throw new IllegalArgumentException("Unsupported listener class [class=" + l.getClass().getSimpleName() + ", required=SQFMonitorMessageListener]");
 		}
 		switch (msg.msgType) {
-		case FIRM_UPDATE:
-			logger.debug("parse::firm update");
-			((SQFMonitorMessageListener)l).onFirmUpdate((SeqSqfMonFirmUpdate)msg);
+		
+		case PORT_MAINT:
+			logger.debug("parse::PORT_MAINT");
+			((SQFMonitorMessageListener)l).onPortMaint((SeqSqfMonPortMaint)msg);
 			break;
-
+		case PORT_ACTIVITY:
+			logger.debug("parse::PORT_ACTIVITY");
+			((SQFMonitorMessageListener)l).onPortActivity((SeqSqfMonPortActivity)msg);
+			break;
+		case PORT_CONNECTION_EVENT:
+			logger.debug("parse::PORT_CONNECTION_EVENT");
+			((SQFMonitorMessageListener)l).onPortConnectionEvent((SeqSqfMonPortConnectionEvent)msg);
+			break;
 		default:
 			break;
 		}

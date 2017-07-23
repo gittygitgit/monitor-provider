@@ -12,8 +12,10 @@ public class StompConnectedEvent implements ApplicationListener<SessionConnected
 
 	@Override
 	public void onApplicationEvent(SessionConnectedEvent event) {
-		LOGGER.info("StompConnectedEvent::onApplicationEvent");
-		LOGGER.info(event);
+		if (LOGGER.isTraceEnabled()) {
+	 		LOGGER.info("StompConnectedEvent::onApplicationEvent");
+			LOGGER.info(event);
+		}
 	}
 
 }

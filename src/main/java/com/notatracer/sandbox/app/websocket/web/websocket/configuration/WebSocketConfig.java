@@ -1,9 +1,10 @@
-package com.notatracer.sandbox.app.websocket.web.websocket.configuration;
+	package com.notatracer.sandbox.app.websocket.web.websocket.configuration;
 
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
-import org.springframework.stereotype.Component;
 import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.SockJsServiceRegistration;
@@ -14,7 +15,7 @@ import com.notatracer.sandbox.app.websocket.web.http.interceptor.MyHttpSessionHa
 import com.notatracer.sandbox.app.websocket.web.websocket.interceptor.InboundChannelInterceptor;
 import com.notatracer.sandbox.app.websocket.web.websocket.interceptor.OutboundChannelInterceptor;
 
-@Component
+@Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
@@ -24,7 +25,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		// ws clients connect to the application at this URL...
 		StompWebSocketEndpointRegistration endpoint = registry.addEndpoint("/sqf");
-		SockJsServiceRegistration registration = endpoint.withSockJS();
+		SockJsServiceRegistration registration = endpoint.setAllowedOrigins("*").withSockJS();
 		registration.setInterceptors(new MyHttpSessionHandshakeInterceptor());
 	}
 
@@ -48,5 +49,8 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 		registration.setInterceptors(new OutboundChannelInterceptor());
 	}
 	
+	public MyHttpSessionHandshakeInterceptor httpSessionHandshakeInterceptor() {
+		return new MyHttpSessionHandshakeInterceptor();
+	}
 	
 }

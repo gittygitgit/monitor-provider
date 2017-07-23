@@ -4,6 +4,10 @@ import com.notatracer.sandbox.app.websocket.integration.messaging.MessageListene
 
 public interface SQFMonitorMessageListener extends MessageListener {
 
-	public void onFirmUpdate(SeqSqfMonFirmUpdate msg);
+	public void onPortMaint(SeqSqfMonPortMaint msg);
 	
+	public void onPortActivity(SeqSqfMonPortActivity msg);
+	
+	public void onPortConnectionEvent(SeqSqfMonPortConnectionEvent msg);
+
 }

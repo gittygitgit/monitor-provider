@@ -1,0 +1,10 @@
+LocalDateTime now = LocalDateTime.now(
+    );     // The current date and time
+
+System.out.println(now);
+
+
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
+
+String nowFormatted = now.format(formatter);
+System.out.println(nowFormatted);

@@ -14,32 +14,40 @@ import org.springframework.messaging.support.ChannelInterceptorAdapter;
 public class OutboundChannelInterceptor extends ChannelInterceptorAdapter {
 
 	private Logger LOGGER = Logger.getLogger(OutboundChannelInterceptor.class);
-	
+	 
 	@Override
 	public Message<?> preSend(Message<?> arg0, MessageChannel arg1) {
-		LOGGER.info("OutboundChannelInterceptor::preSend");
+		if (LOGGER.isTraceEnabled()) {
+			LOGGER.trace("OutboundChannelInterceptor::preSend");
+		}
 		MessageHeaders headers = arg0.getHeaders();
 		headers.forEach((k, v) -> {
-			LOGGER.info(String.format("Header [name=%s, value=%s]", k, v));
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug(String.format("Header [name=%s, value=%s]", k, v));
+			}
 		});
 		return arg0;
 	}
 
 	@Override
 	public void postSend(Message<?> arg0, MessageChannel arg1, boolean arg2) {
-		LOGGER.info("OutboundChannelInterceptor::postSend");
-
+		if (LOGGER.isTraceEnabled()) {
+			LOGGER.trace("OutboundChannelInterceptor::postSend");
+		}
 	}
 
 	@Override
 	public void afterSendCompletion(Message<?> arg0, MessageChannel arg1, boolean arg2, Exception arg3) {
-		LOGGER.info("OutboundChannelInterceptor::afterSendCompletion");
+		if (LOGGER.isTraceEnabled()) {
+			LOGGER.trace("OutboundChannelInterceptor::afterSendCompletion");
+		}
 	}
 
 	@Override
 	public boolean preReceive(MessageChannel arg0) {
-		LOGGER.info("OutboundChannelInterceptor::preReceive");
-		
+		if (LOGGER.isTraceEnabled()) {
+			LOGGER.trace("OutboundChannelInterceptor::preReceive");
+		}		
 		return false;
 	}
 
@@ -48,7 +56,9 @@ public class OutboundChannelInterceptor extends ChannelInterceptorAdapter {
 		LOGGER.info("OutboundChannelInterceptor::postReceive");
 		MessageHeaders headers = arg0.getHeaders();
 		headers.forEach((k, v) -> {
-			LOGGER.info(String.format("Header [name=%s, value=%s]", k, v));
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug(String.format("Header [name=%s, value=%s]", k, v));
+			}
 		});
 		return null;
 	}
@@ -56,9 +66,9 @@ public class OutboundChannelInterceptor extends ChannelInterceptorAdapter {
 	
 	@Override
 	public void afterReceiveCompletion(Message<?> arg0, MessageChannel arg1, Exception arg2) {
-		LOGGER.info("OutboundChannelInterceptor::afterReceiveCompletion");
+		if (LOGGER.isTraceEnabled()) {
+			LOGGER.trace("OutboundChannelInterceptor::afterReceiveCompletion");
+		}
 	}
-
-
 
 }
